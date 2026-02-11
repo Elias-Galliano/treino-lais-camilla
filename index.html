@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+
+<title>Programa A — Laís Camilla | Retorno 09/03/2026</title>
+
+<style>
+
+*{box-sizing:border-box}
+
+body{
+margin:0;
+font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto;
+background:linear-gradient(135deg,#0f172a,#020617);
+color:white;
+}
+
+/* HEADER */
+
+header{
+padding:28px;
+background:linear-gradient(120deg,#06b6d4,#7c3aed);
+box-shadow:0 10px 40px rgba(0,0,0,.4);
+}
+
+h1{
+margin:0;
+font-size:26px;
+letter-spacing:.3px;
+}
+
+.sub{
+opacity:.95;
+margin-top:6px;
+font-weight:500;
+}
+
+/* CARD */
+
+.container{
+max-width:900px;
+margin:auto;
+padding:24px;
+}
+
+.card{
+background:#0b1220;
+border-radius:20px;
+padding:18px;
+box-shadow:0 20px 60px rgba(0,0,0,.5);
+}
+
+/* EXERCISES */
+
+.exercise{
+border:1px solid rgba(255,255,255,.08);
+border-radius:16px;
+margin-bottom:14px;
+overflow:hidden;
+transition:.25s;
+}
+
+.exercise:hover{
+border-color:#22c55e;
+}
+
+.row{
+cursor:pointer;
+padding:14px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.badge{
+background:#22c55e;
+padding:6px 10px;
+border-radius:10px;
+font-weight:700;
+}
+
+.details{
+display:none;
+padding:16px;
+background:#020617;
+animation:fade .35s ease;
+}
+
+@keyframes fade{
+from{opacity:0;transform:translateY(-6px)}
+to{opacity:1}
+}
+
+/* VIDEO */
+
+.thumb{
+width:100%;
+border-radius:14px;
+overflow:hidden;
+margin-bottom:12px;
+}
+
+.thumb img{
+width:100%;
+display:block;
+}
+
+.fallback{
+background:#020617;
+border:2px dashed #475569;
+padding:30px;
+text-align:center;
+border-radius:14px;
+}
+
+/* BUTTON */
+
+.btn{
+display:block;
+text-align:center;
+padding:14px;
+border-radius:14px;
+background:linear-gradient(120deg,#22c55e,#06b6d4);
+font-weight:800;
+text-decoration:none;
+color:white;
+margin-top:8px;
+transition:.2s;
+}
+
+.btn:hover{
+transform:scale(1.03);
+}
+
+.meta{
+opacity:.8;
+font-size:14px;
+margin-bottom:10px;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Programa A — Laís Camilla</h1>
+<div class="sub">
+Objetivo: Fortalecimento • <strong>Retorno: 09/03/2026</strong><br>
+Intervalo: 45s • Alongamentos: 1,4,8,9,12
+</div>
+</header>
+
+<div class="container">
+<div class="card" id="list"></div>
+</div>
+
+<script>
+
+const exercises=[
+
+{n:1,name:"Remada articulada (pegada neutra)",series:"3",reps:"12",load:"3kg",id:"i3FScctBKvc"},
+{n:2,name:"Leg Press 45°",series:"3",reps:"12",load:"20kg",id:"waAxlYvtCcI"},
+{n:3,name:"Pulley convergente",series:"3",reps:"12",load:"10kg",id:"jmzKXyZ5uxo"},
+{n:4,name:"Agachamento taça",series:"3",reps:"20",load:"7kg",id:"Vkbmyd1bK3U"},
+
+// separados 👇
+{n:5,name:"Flexão tibial (cadeira flexora)",series:"2",reps:"20",load:"3kg",id:"vWFHYnVdBp4"},
+{n:6,name:"Rosca bíceps com halteres",series:"2",reps:"12",load:"3kg",id:"ls1JIY9QmRA"},
+
+{n:7,name:"Cadeira abdutora",series:"3",reps:"20",load:"5 placas",id:"e2gmqTG1OgQ"},
+{n:8,name:"Tríceps testa",series:"3",reps:"12",load:"4kg",id:"VakpIeaaeXA"},
+{n:9,name:"Cadeira extensora",series:"3",reps:"12",load:"3 placas",id:"y6juG3XuRe4"},
+{n:10,name:"Voador frontal (Peck Deck - peitoral)",series:"3",reps:"12",load:"1 placa",id:"a5XwjsD3AOI"},
+{n:11,name:"Leg Press 180°",series:"3",reps:"12",load:"3 placas",id:"M_jE3m8LcQ8"},
+{n:12,name:"Pulley supinado",series:"3",reps:"12",load:"3 placas",id:"zg1MSZR-y4Y"},
+{n:13,name:"Prancha abdominal",series:"2",reps:"30s",load:"—",id:"DoOtkRaL1BI"}
+
+];
+
+const list=document.getElementById("list");
+
+exercises.forEach(ex=>{
+
+const el=document.createElement("div");
+el.className="exercise";
+
+el.innerHTML=`
+
+<div class="row">
+<div>
+<strong>${ex.n}. ${ex.name}</strong>
+<div class="meta">${ex.series} séries • ${ex.reps} reps • Carga: ${ex.load}</div>
+</div>
+
+<div class="badge">Abrir</div>
+</div>
+
+<div class="details">
+
+<div class="thumb">
+<img src="https://img.youtube.com/vi/${ex.id}/hqdefault.jpg"
+onerror="this.parentElement.innerHTML='<div class=fallback>Imagem indisponível.<br><a class=btn href=https://youtube.com/watch?v=${ex.id} target=_blank>Assistir exercício</a></div>'">
+</div>
+
+<a class="btn" href="https://youtube.com/watch?v=${ex.id}" target="_blank">
+▶ Assistir exercício
+</a>
+
+</div>
+`;
+
+el.querySelector(".row").onclick=()=>{
+
+const open=document.querySelector(".details[style='display: block;']");
+if(open && open!==el.querySelector(".details"))
+open.style.display="none";
+
+const d=el.querySelector(".details");
+d.style.display=d.style.display==="block"?"none":"block";
+
+};
+
+list.appendChild(el);
+
+});
+
+</script>
+
+</body>
+</html>
