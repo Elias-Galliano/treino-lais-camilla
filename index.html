@@ -365,6 +365,19 @@
       color: var(--accent-pink);
     }
 
+    .exercise-timestamp {
+      font-size: 0.8rem;
+      color: var(--success);
+      margin-top: 0.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .exercise-timestamp i {
+      font-size: 0.7rem;
+    }
+
     .exercise-actions {
       display: flex;
       align-items: center;
@@ -525,6 +538,11 @@
     .aside-header {
       padding: 1.5rem;
       border-bottom: var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
     }
 
     .aside-header h3 {
@@ -567,6 +585,98 @@
     .tip-item span {
       flex: 1;
       font-weight: 500;
+    }
+
+    .history-filters {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      background: var(--surface-light);
+      border: var(--border);
+      color: var(--text-secondary);
+      padding: 0.4rem 0.8rem;
+      border-radius: 100px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .filter-btn:hover {
+      border-color: var(--accent-pink);
+      color: var(--accent-pink);
+    }
+
+    .filter-btn.active {
+      background: var(--accent-gradient);
+      color: white;
+      border: none;
+    }
+
+    .history-item {
+      font-size: 0.85rem;
+      padding: 0.75rem;
+      margin: 0.5rem 0;
+      background: var(--surface-light);
+      border-radius: var(--radius-sm);
+      border-left: 3px solid var(--accent-pink);
+    }
+
+    .history-item strong {
+      color: var(--accent-pink);
+    }
+
+    .history-date {
+      color: var(--text-secondary);
+      font-size: 0.75rem;
+      display: block;
+      margin-top: 0.3rem;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 0.2rem 0.5rem;
+      border-radius: 100px;
+      display: inline-block;
+    }
+
+    .history-timestamp {
+      color: var(--success);
+      font-size: 0.75rem;
+      margin-left: 0.5rem;
+    }
+
+    .btn-clear-history {
+      background: transparent;
+      border: 1px solid var(--accent-pink);
+      color: var(--accent-pink);
+      padding: 0.5rem 1rem;
+      border-radius: 100px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .btn-clear-history:hover {
+      background: var(--accent-pink);
+      color: white;
+    }
+
+    .stats-card {
+      background: linear-gradient(135deg, rgba(255,105,180,0.2), rgba(183,123,255,0.2));
+      border: var(--border);
+      border-radius: var(--radius-md);
+      padding: 1rem;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .stats-number {
+      font-size: 2rem;
+      font-weight: 700;
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
     .empty-state {
@@ -679,6 +789,35 @@
     <aside>
       <div class="aside-card">
         <div class="aside-header">
+          <h3><i class="fas fa-history"></i> Histórico Permanente</h3>
+          <button class="btn-clear-history" id="clear-history-btn" title="Limpar TODO o histórico (cuidado!)">
+            <i class="fas fa-trash"></i> Limpar tudo
+          </button>
+        </div>
+        <div class="aside-content">
+          <div class="stats-card">
+            <div>Total de registros</div>
+            <div class="stats-number" id="total-records">0</div>
+          </div>
+          
+          <div class="history-filters">
+            <button class="filter-btn active" data-filter="all">Todos</button>
+            <button class="filter-btn" data-filter="today">Hoje</button>
+            <button class="filter-btn" data-filter="week">Esta semana</button>
+            <button class="filter-btn" data-filter="month">Este mês</button>
+          </div>
+          
+          <div id="history-list" style="max-height: 400px; overflow-y: auto;">
+            <div class="tip-item">
+              <i class="fas fa-info-circle"></i>
+              <span>Marque exercícios para ver o histórico</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="aside-card" style="margin-top: 1.5rem;">
+        <div class="aside-header">
           <h3><i class="fas fa-info-circle"></i> Dicas da Laís</h3>
         </div>
         <div class="aside-content">
@@ -687,8 +826,16 @@
             <span>Marque os exercícios como concluídos</span>
           </div>
           <div class="tip-item">
-            <i class="fas fa-sync-alt"></i>
-            <span>Reset automático todo dia às 00:00</span>
+            <i class="fas fa-clock"></i>
+            <span>Horário de conclusão fica registrado para SEMPRE</span>
+          </div>
+          <div class="tip-item">
+            <i class="fas fa-history"></i>
+            <span>Histórico permanente com filtros por data</span>
+          </div>
+          <div class="tip-item">
+            <i class="fas fa-calendar-alt"></i>
+            <span>Você pode ver todos os treinos anteriores</span>
           </div>
           <div class="tip-item">
             <i class="fas fa-music"></i>
@@ -707,7 +854,7 @@
   </div>
 
   <footer>
-    <i class="fas fa-heart"></i> Feito com carinho para Laís • 13 exercícios <i class="fas fa-heart"></i>
+    <i class="fas fa-heart"></i> Feito com carinho para Laís • 13 exercícios • Histórico permanente <i class="fas fa-heart"></i>
   </footer>
 
   <script>
@@ -717,6 +864,10 @@
     const progressCount = document.getElementById("progress-count");
     const progressBar = document.getElementById("progress-bar");
     const currentDateBadge = document.getElementById("current-date-badge");
+    const historyList = document.getElementById("history-list");
+    const clearHistoryBtn = document.getElementById("clear-history-btn");
+    const totalRecords = document.getElementById("total-records");
+    const filterBtns = document.querySelectorAll('.filter-btn');
 
     // ===== DATA =====
     function getCurrentDate() {
@@ -731,22 +882,27 @@
       const [year, month, day] = dateStr.split('-');
       const date = new Date(year, month - 1, day);
       const dias = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
-      return `${dias[date.getDay()]}, ${day}/${month}`;
+      return `${dias[date.getDay()]}, ${day}/${month}/${year}`;
+    }
+
+    function getCurrentDateTime() {
+      const now = new Date();
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const seconds = String(now.getSeconds()).padStart(2, '0');
+      return `${hours}:${minutes}:${seconds}`;
     }
     
-    // Reset automático
+    // Data atual
     const today = getCurrentDate();
-    const lastVisit = localStorage.getItem('lastVisitDate');
-    
     currentDateBadge.innerHTML = `<i class="fas fa-calendar-day"></i> <span>${formatDateForDisplay(today)}</span>`;
     
-    if (lastVisit !== today) {
-      localStorage.removeItem('completedExercises');
-      localStorage.setItem('lastVisitDate', today);
-    }
-    
-    // Estado dos exercícios
+    // Estado dos exercícios e histórico PERMANENTE
     let completedExercises = JSON.parse(localStorage.getItem('completedExercises')) || {};
+    let permanentHistory = JSON.parse(localStorage.getItem('permanentHistory')) || [];
+    
+    // Filtro atual
+    let currentFilter = 'all';
 
     // Dados dos exercícios
     const DATA = {
@@ -771,6 +927,126 @@
       return `A-${exercise.n}`;
     }
 
+    function isSameWeek(date1, date2) {
+      const d1 = new Date(date1);
+      const d2 = new Date(date2);
+      
+      // Primeiro dia da semana (domingo = 0)
+      const d1Week = Math.floor((d1 - new Date(d1.getFullYear(), 0, 1)) / (7 * 24 * 60 * 60 * 1000));
+      const d2Week = Math.floor((d2 - new Date(d2.getFullYear(), 0, 1)) / (7 * 24 * 60 * 60 * 1000));
+      
+      return d1Week === d2Week && d1.getFullYear() === d2.getFullYear();
+    }
+
+    function isSameMonth(date1, date2) {
+      const d1 = new Date(date1);
+      const d2 = new Date(date2);
+      return d1.getMonth() === d2.getMonth() && d1.getFullYear() === d2.getFullYear();
+    }
+
+    function filterHistoryByDate(entries, filter) {
+      const today = new Date();
+      const todayStr = getCurrentDate();
+      
+      return entries.filter(entry => {
+        switch(filter) {
+          case 'today':
+            return entry.date === todayStr;
+          case 'week':
+            return isSameWeek(entry.date, todayStr);
+          case 'month':
+            return isSameMonth(entry.date, todayStr);
+          default:
+            return true;
+        }
+      });
+    }
+
+    function addToHistory(exercise, action) {
+      const timestamp = getCurrentDateTime();
+      const historyEntry = {
+        id: Date.now() + Math.random(), // ID único
+        exerciseNumber: exercise.n,
+        exerciseName: exercise.name,
+        action: action,
+        time: timestamp,
+        date: today,
+        fullDate: new Date().toISOString() // Data completa para ordenação
+      };
+      
+      permanentHistory.unshift(historyEntry); // Adiciona no início
+      
+      // Salva no localStorage (sem limite!)
+      localStorage.setItem('permanentHistory', JSON.stringify(permanentHistory));
+      
+      updateTotalRecords();
+      renderHistory(currentFilter);
+    }
+
+    function removeFromHistory(exercise) {
+      // Remove TODAS as entradas deste exercício (todas as datas)
+      permanentHistory = permanentHistory.filter(entry => 
+        !(entry.exerciseNumber === exercise.n)
+      );
+      
+      localStorage.setItem('permanentHistory', JSON.stringify(permanentHistory));
+      
+      updateTotalRecords();
+      renderHistory(currentFilter);
+    }
+
+    function updateTotalRecords() {
+      totalRecords.textContent = permanentHistory.length;
+    }
+
+    function renderHistory(filter = 'all') {
+      currentFilter = filter;
+      
+      // Atualizar botões ativos
+      filterBtns.forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.dataset.filter === filter) {
+          btn.classList.add('active');
+        }
+      });
+      
+      const filteredHistory = filterHistoryByDate(permanentHistory, filter);
+      
+      if (filteredHistory.length === 0) {
+        historyList.innerHTML = `
+          <div class="tip-item">
+            <i class="fas fa-info-circle"></i>
+            <span>Nenhum registro encontrado</span>
+          </div>
+        `;
+        return;
+      }
+      
+      let html = '';
+      filteredHistory.forEach(entry => {
+        // Formatar data para exibição
+        const [year, month, day] = entry.date.split('-');
+        const displayDate = `${day}/${month}/${year}`;
+        
+        html += `
+          <div class="history-item">
+            <i class="fas fa-check-circle" style="color: var(--success);"></i>
+            <strong>#${entry.exerciseNumber}</strong> ${entry.exerciseName}
+            <div style="margin-top: 0.3rem;">
+              <span class="history-date">
+                <i class="fas fa-calendar-alt"></i> ${displayDate}
+              </span>
+              <span class="history-timestamp">
+                <i class="fas fa-clock"></i> ${entry.time}
+              </span>
+            </div>
+          </div>
+        `;
+      });
+      
+      historyList.innerHTML = html;
+    }
+
     function toggleComplete(exercise, button) {
       const key = getExerciseKey(exercise);
       
@@ -778,10 +1054,12 @@
         delete completedExercises[key];
         button.classList.remove('completed');
         button.innerHTML = '<i class="fas fa-circle"></i>';
+        removeFromHistory(exercise);
       } else {
         completedExercises[key] = true;
         button.classList.add('completed');
         button.innerHTML = '<i class="fas fa-check"></i>';
+        addToHistory(exercise, 'Concluído');
       }
       
       localStorage.setItem('completedExercises', JSON.stringify(completedExercises));
@@ -809,6 +1087,19 @@
       progressBar.style.width = total > 0 ? `${(completed/total)*100}%` : '0%';
     }
 
+    function clearAllHistory() {
+      if (confirm('⚠️ ATENÇÃO: Isso vai apagar TODO o histórico permanente! Tem certeza?')) {
+        completedExercises = {};
+        permanentHistory = [];
+        localStorage.setItem('completedExercises', JSON.stringify(completedExercises));
+        localStorage.setItem('permanentHistory', JSON.stringify(permanentHistory));
+        render();
+        updateTotalRecords();
+        renderHistory(currentFilter);
+        updateProgress();
+      }
+    }
+
     function render() {
       const query = q.value.toLowerCase().trim();
       list.innerHTML = "";
@@ -824,6 +1115,11 @@
         const div = document.createElement('div');
         div.className = `exercise-item ${isCompleted ? 'completed' : ''}`;
         
+        // Encontrar a entrada MAIS RECENTE do histórico para este exercício (hoje)
+        const todayEntry = permanentHistory.find(entry => 
+          entry.exerciseNumber === item.n && entry.date === today
+        );
+        
         div.innerHTML = `
           <button class="exercise-header">
             <div class="exercise-info">
@@ -835,6 +1131,11 @@
                   <span><i class="fas fa-repeat"></i> ${item.reps}</span>
                   <span><i class="fas fa-weight-hanging"></i> ${item.load}</span>
                 </div>
+                ${todayEntry ? `
+                  <div class="exercise-timestamp">
+                    <i class="fas fa-clock"></i> Hoje às ${todayEntry.time}
+                  </div>
+                ` : ''}
               </div>
             </div>
             <div class="exercise-actions">
@@ -882,8 +1183,20 @@
       updateProgress();
     }
 
+    // Event listeners
     q.addEventListener('input', render);
+    clearHistoryBtn.addEventListener('click', clearAllHistory);
+    
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        renderHistory(btn.dataset.filter);
+      });
+    });
+    
+    // Render inicial
     render();
+    updateTotalRecords();
+    renderHistory('all');
   </script>
 </body>
 </html>
