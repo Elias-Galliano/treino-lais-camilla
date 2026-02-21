@@ -27,8 +27,12 @@
       --accent-gradient: linear-gradient(135deg, #ff69b4 0%, #b77bff 100%);
       --success: #10b981;
       --success-gradient: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+      --warning: #f59e0b;
+      --warning-gradient: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+      --danger: #ef4444;
       --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
       --border: 1px solid #3a3a4a;
+      --blur: blur(10px);
       --radius-lg: 24px;
       --radius-md: 16px;
       --radius-sm: 12px;
@@ -59,6 +63,7 @@
       align-items: center;
       justify-content: space-between;
       gap: 2rem;
+      flex-wrap: wrap;
     }
 
     .brand {
@@ -68,38 +73,83 @@
     }
 
     .logo {
-      width: 48px;
-      height: 48px;
-      background: white;
+      width: 60px;
+      height: 60px;
       border-radius: var(--radius-sm);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 800;
-      font-size: 1.2rem;
-      color: #ff1493;
-      box-shadow: 0 4px 15px rgba(255, 20, 147, 0.4);
-      text-transform: uppercase;
+      overflow: hidden;
+      padding: 0;
+      background: transparent;
+    }
+
+    .foto-perfil {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: var(--radius-sm);
     }
 
     .brand-text h1 {
-      font-size: 1.5rem;
+      font-size: 1.8rem;
       font-weight: 700;
       color: white;
       text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      margin-bottom: 0.5rem;
     }
 
-    .brand-text p {
-      color: rgba(255, 255, 255, 0.95);
-      font-size: 0.9rem;
+    .student-info {
       display: flex;
-      gap: 1rem;
       flex-wrap: wrap;
-      font-weight: 500;
+      gap: 1rem;
+      margin-top: 0.5rem;
     }
 
-    .brand-text p i {
+    .info-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 0.5rem 1rem;
+      border-radius: 100px;
+      border: var(--border);
+      font-size: 0.9rem;
+      backdrop-filter: var(--blur);
+    }
+
+    .info-item i {
+      color: var(--accent-pink);
+      font-size: 1rem;
+    }
+
+    .info-item strong {
       color: white;
+      margin-left: 0.25rem;
+      font-weight: 600;
+    }
+
+    .info-item.warning {
+      background: rgba(245, 158, 11, 0.2);
+      border-color: var(--warning);
+      animation: pulse 2s infinite;
+    }
+
+    .info-item.warning i {
+      color: var(--warning);
+    }
+
+    .info-item.danger {
+      background: rgba(239, 68, 68, 0.2);
+      border-color: var(--danger);
+      animation: pulse 1s infinite;
+    }
+
+    .info-item.danger i {
+      color: var(--danger);
+    }
+
+    @keyframes pulse {
+      0% { opacity: 1; }
+      50% { opacity: 0.7; }
+      100% { opacity: 1; }
     }
 
     .badge {
@@ -193,7 +243,7 @@
     .progress-container {
       background: var(--surface-light);
       border-radius: 100px;
-      height: 10px;
+      height: 8px;
       width: 100%;
       margin-bottom: 1.5rem;
       overflow: hidden;
@@ -374,10 +424,6 @@
       gap: 0.3rem;
     }
 
-    .exercise-timestamp i {
-      font-size: 0.7rem;
-    }
-
     .exercise-actions {
       display: flex;
       align-items: center;
@@ -388,8 +434,8 @@
       background: var(--surface);
       border: var(--border);
       color: var(--text-secondary);
-      width: 44px;
-      height: 44px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
       display: flex;
       align-items: center;
@@ -411,14 +457,9 @@
       border: none;
     }
 
-    .btn-complete.completed:hover {
-      transform: scale(1.1);
-      box-shadow: 0 0 15px #10b981;
-    }
-
     .chevron {
-      width: 40px;
-      height: 40px;
+      width: 36px;
+      height: 36px;
       background: var(--surface);
       border-radius: 50%;
       display: flex;
@@ -495,7 +536,7 @@
 
     .btn {
       flex: 1;
-      padding: 1rem 1.5rem;
+      padding: 0.875rem 1.5rem;
       border-radius: 100px;
       border: none;
       font-weight: 600;
@@ -528,63 +569,20 @@
       background: #cc0000;
     }
 
-    .aside-card {
-      background: var(--surface);
-      border: var(--border);
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-    }
-
-    .aside-header {
-      padding: 1.5rem;
-      border-bottom: var(--border);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-
-    .aside-header h3 {
-      font-size: 1.2rem;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      color: var(--text-primary);
-    }
-
-    .aside-header h3 i {
+    .btn-clear-history {
+      background: transparent;
+      border: 1px solid var(--accent-pink);
       color: var(--accent-pink);
+      padding: 0.5rem 1rem;
+      border-radius: 100px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: var(--transition);
     }
 
-    .aside-content {
-      padding: 1.5rem;
-    }
-
-    .tip-item {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      padding: 0.75rem 0;
-      color: var(--text-secondary);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .tip-item:last-child {
-      border-bottom: none;
-    }
-
-    .tip-item i {
-      color: var(--accent-pink);
-      font-size: 1.2rem;
-      width: 24px;
-      text-align: center;
-    }
-
-    .tip-item span {
-      flex: 1;
-      font-weight: 500;
+    .btn-clear-history:hover {
+      background: var(--accent-pink);
+      color: white;
     }
 
     .history-filters {
@@ -646,22 +644,6 @@
       margin-left: 0.5rem;
     }
 
-    .btn-clear-history {
-      background: transparent;
-      border: 1px solid var(--accent-pink);
-      color: var(--accent-pink);
-      padding: 0.5rem 1rem;
-      border-radius: 100px;
-      font-size: 0.8rem;
-      cursor: pointer;
-      transition: var(--transition);
-    }
-
-    .btn-clear-history:hover {
-      background: var(--accent-pink);
-      color: white;
-    }
-
     .stats-card {
       background: linear-gradient(135deg, rgba(255,105,180,0.2), rgba(183,123,255,0.2));
       border: var(--border);
@@ -677,6 +659,24 @@
       background: var(--accent-gradient);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+    }
+
+    .alert-banner {
+      background: var(--warning-gradient);
+      color: white;
+      padding: 1rem;
+      border-radius: var(--radius-md);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      font-weight: 600;
+      animation: pulse 2s infinite;
+    }
+
+    .alert-banner i {
+      font-size: 1.5rem;
     }
 
     .empty-state {
@@ -712,31 +712,20 @@
       color: var(--accent-pink);
       margin: 0 0.5rem;
     }
-
-    /* Animações */
-    @keyframes float {
-      0% { transform: translateY(0px); }
-      50% { transform: translateY(-5px); }
-      100% { transform: translateY(0px); }
-    }
-
-    .logo {
-      animation: float 3s ease-in-out infinite;
-    }
   </style>
 </head>
 <body>
   <header>
     <div class="header-content">
       <div class="brand">
-        <div class="logo">LAÍS</div>
+        <div class="logo">
+          <img src="https://i.ibb.co/wZszN79C/Captura-de-tela-2026-02-21-112042.png" alt="Laís" class="foto-perfil">
+        </div>
         <div class="brand-text">
           <h1>Ficha de Treino • Laís</h1>
-          <p>
-            <span><i class="fas fa-heart"></i> Laís Camilla</span>
-            <span><i class="fas fa-calendar-alt"></i> Retorno: 09/03/2026</span>
-            <span><i class="fas fa-bullseye"></i> Fortalecimento</span>
-          </p>
+          <div class="student-info" id="student-info">
+            <!-- Será preenchido pelo JavaScript -->
+          </div>
         </div>
       </div>
       <div class="badge date-badge" id="current-date-badge">
@@ -757,6 +746,8 @@
         </div>
         
         <div class="card-content">
+          <div id="ficha-alert" style="display: none;"></div>
+          
           <div class="progress-text">
             <span><i class="fas fa-check-circle"></i> Progresso do dia</span>
             <span id="progress-count">0/13 concluídos</span>
@@ -787,16 +778,16 @@
     </main>
 
     <aside>
-      <div class="aside-card">
-        <div class="aside-header">
-          <h3><i class="fas fa-history"></i> Histórico Permanente</h3>
-          <button class="btn-clear-history" id="clear-history-btn" title="Limpar TODO o histórico (cuidado!)">
-            <i class="fas fa-trash"></i> Limpar tudo
+      <div class="card">
+        <div class="card-header">
+          <h2><i class="fas fa-history"></i> Histórico Permanente</h2>
+          <button class="btn-clear-history" id="clear-history-btn" title="Limpar TODO o histórico">
+            <i class="fas fa-trash"></i> Limpar
           </button>
         </div>
-        <div class="aside-content">
+        <div class="card-content">
           <div class="stats-card">
-            <div>Total de registros</div>
+            <div>Total de treinos</div>
             <div class="stats-number" id="total-records">0</div>
           </div>
           
@@ -815,12 +806,12 @@
           </div>
         </div>
       </div>
-      
-      <div class="aside-card" style="margin-top: 1.5rem;">
-        <div class="aside-header">
-          <h3><i class="fas fa-info-circle"></i> Dicas da Laís</h3>
+
+      <div class="card" style="margin-top: 1.5rem;">
+        <div class="card-header">
+          <h2><i class="fas fa-info-circle"></i> Dicas da Laís</h2>
         </div>
-        <div class="aside-content">
+        <div class="card-content">
           <div class="tip-item">
             <i class="fas fa-check-circle"></i>
             <span>Marque os exercícios como concluídos</span>
@@ -835,7 +826,7 @@
           </div>
           <div class="tip-item">
             <i class="fas fa-calendar-alt"></i>
-            <span>Você pode ver todos os treinos anteriores</span>
+            <span>Troca de ficha: 09/03/2026</span>
           </div>
           <div class="tip-item">
             <i class="fas fa-music"></i>
@@ -844,9 +835,6 @@
           <div class="tip-item">
             <i class="fas fa-tint"></i>
             <span>Não esqueça de se hidratar!</span>
-          </div>
-          <div style="margin-top: 1.5rem; text-align: center; opacity: 0.5;">
-            <i class="fas fa-heart" style="color: var(--accent-pink); font-size: 1.5rem;"></i>
           </div>
         </div>
       </div>
@@ -868,6 +856,111 @@
     const clearHistoryBtn = document.getElementById("clear-history-btn");
     const totalRecords = document.getElementById("total-records");
     const filterBtns = document.querySelectorAll('.filter-btn');
+    const studentInfo = document.getElementById("student-info");
+    const fichaAlert = document.getElementById("ficha-alert");
+
+    let currentFilter = 'all';
+    
+    // ===== DADOS DA ALUNA =====
+    const ALUNA = {
+      nome: "Laís Camilla",
+      nascimento: "2001-01-09", // Ajuste conforme necessário
+      dataInicio: "2026-02-21", // Data que começou essa ficha
+      dataTrocaFicha: "2026-03-09", // Data para trocar de ficha
+      professor: "Larissa"
+    };
+
+    // ===== FUNÇÕES DE DATA =====
+    function formatDateBr(dateStr) {
+      if (!dateStr) return '';
+      const [year, month, day] = dateStr.split('-');
+      return `${day}/${month}/${year}`;
+    }
+
+    function calcularIdade(dataNascimento) {
+      if (!dataNascimento) return 0;
+      const [ano, mes, dia] = dataNascimento.split('-');
+      const nasc = new Date(ano, mes - 1, dia);
+      const hoje = new Date();
+      let idade = hoje.getFullYear() - nasc.getFullYear();
+      const mesDiff = hoje.getMonth() - nasc.getMonth();
+      if (mesDiff < 0 || (mesDiff === 0 && hoje.getDate() < nasc.getDate())) {
+        idade--;
+      }
+      return idade;
+    }
+
+    function calcularDiasParaTrocaFicha(dataTroca) {
+      if (!dataTroca) return 0;
+      const hoje = new Date();
+      const [ano, mes, dia] = dataTroca.split('-');
+      const troca = new Date(ano, mes - 1, dia);
+      const diffTime = troca - hoje;
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+      return diffDays;
+    }
+
+    function renderStudentInfo() {
+      const idade = calcularIdade(ALUNA.nascimento);
+      const diasParaTroca = calcularDiasParaTrocaFicha(ALUNA.dataTrocaFicha);
+      
+      let alertClass = '';
+      let alertIcon = 'fa-calendar-check';
+      let alertText = '';
+      
+      if (diasParaTroca <= 0) {
+        alertClass = 'danger';
+        alertIcon = 'fa-exclamation-triangle';
+        alertText = '⚠️ FICHA VENCIDA! Trocar hoje!';
+        
+        fichaAlert.style.display = 'block';
+        fichaAlert.innerHTML = `
+          <div class="alert-banner">
+            <i class="fas fa-exclamation-triangle"></i>
+            ⚠️ ATENÇÃO: Data de troca de ficha VENCIDA! ⚠️
+            <i class="fas fa-exclamation-triangle"></i>
+          </div>
+        `;
+      } else if (diasParaTroca <= 7) {
+        alertClass = 'warning';
+        alertIcon = 'fa-clock';
+        alertText = `⚠️ Faltam ${diasParaTroca} dias para trocar a ficha!`;
+        
+        fichaAlert.style.display = 'block';
+        fichaAlert.innerHTML = `
+          <div class="alert-banner">
+            <i class="fas fa-clock"></i>
+            ⏰ Faltam ${diasParaTroca} dias para trocar de ficha! ⏰
+            <i class="fas fa-clock"></i>
+          </div>
+        `;
+      } else {
+        fichaAlert.style.display = 'none';
+      }
+      
+      studentInfo.innerHTML = `
+        <div class="info-item">
+          <i class="fas fa-user"></i>
+          <span>${ALUNA.nome}</span>
+        </div>
+        <div class="info-item">
+          <i class="fas fa-birthday-cake"></i>
+          <span>${formatDateBr(ALUNA.nascimento)} (${idade} anos)</span>
+        </div>
+        <div class="info-item">
+          <i class="fas fa-calendar-plus"></i>
+          <span>Início: <strong>${formatDateBr(ALUNA.dataInicio)}</strong></span>
+        </div>
+        <div class="info-item ${alertClass}">
+          <i class="fas ${alertIcon}"></i>
+          <span>Troca ficha: <strong>${formatDateBr(ALUNA.dataTrocaFicha)}</strong> ${alertText}</span>
+        </div>
+        <div class="info-item">
+          <i class="fas fa-chalkboard-teacher"></i>
+          <span>Prof.: <strong>${ALUNA.professor}</strong></span>
+        </div>
+      `;
+    }
 
     // ===== DATA =====
     function getCurrentDate() {
@@ -882,7 +975,7 @@
       const [year, month, day] = dateStr.split('-');
       const date = new Date(year, month - 1, day);
       const dias = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
-      return `${dias[date.getDay()]}, ${day}/${month}/${year}`;
+      return `${dias[date.getDay()]}, ${day}/${month}`;
     }
 
     function getCurrentDateTime() {
@@ -897,14 +990,23 @@
     const today = getCurrentDate();
     currentDateBadge.innerHTML = `<i class="fas fa-calendar-day"></i> <span>${formatDateForDisplay(today)}</span>`;
     
-    // Estado dos exercícios e histórico PERMANENTE
-    let completedExercises = JSON.parse(localStorage.getItem('completedExercises')) || {};
-    let permanentHistory = JSON.parse(localStorage.getItem('permanentHistory')) || [];
+    // Renderizar informações da aluna
+    renderStudentInfo();
     
-    // Filtro atual
-    let currentFilter = 'all';
+    // Reset automático (mantido do original)
+    const lastVisit = localStorage.getItem('lais_lastVisitDate');
+    
+    if (lastVisit !== today) {
+      // Não limpa o histórico permanente, só os concluídos do dia
+      localStorage.removeItem('lais_completedExercises');
+      localStorage.setItem('lais_lastVisitDate', today);
+    }
+    
+    // Estado dos exercícios e histórico PERMANENTE
+    let completedExercises = JSON.parse(localStorage.getItem('lais_completedExercises')) || {};
+    let permanentHistory = JSON.parse(localStorage.getItem('lais_permanentHistory')) || [];
 
-    // Dados dos exercícios
+    // Dados dos exercícios (original da Laís)
     const DATA = {
       items: [
         { n:1, name:"Remada articulada (pegada neutra)", sets:"3", reps:"12", load:"3kg", id:"i3FScctBKvc" },
@@ -927,11 +1029,11 @@
       return `A-${exercise.n}`;
     }
 
+    // Funções de data para filtros
     function isSameWeek(date1, date2) {
       const d1 = new Date(date1);
       const d2 = new Date(date2);
       
-      // Primeiro dia da semana (domingo = 0)
       const d1Week = Math.floor((d1 - new Date(d1.getFullYear(), 0, 1)) / (7 * 24 * 60 * 60 * 1000));
       const d2Week = Math.floor((d2 - new Date(d2.getFullYear(), 0, 1)) / (7 * 24 * 60 * 60 * 1000));
       
@@ -945,7 +1047,6 @@
     }
 
     function filterHistoryByDate(entries, filter) {
-      const today = new Date();
       const todayStr = getCurrentDate();
       
       return entries.filter(entry => {
@@ -962,34 +1063,30 @@
       });
     }
 
-    function addToHistory(exercise, action) {
+    function addToHistory(exercise) {
       const timestamp = getCurrentDateTime();
       const historyEntry = {
-        id: Date.now() + Math.random(), // ID único
+        id: Date.now() + Math.random(),
         exerciseNumber: exercise.n,
         exerciseName: exercise.name,
-        action: action,
         time: timestamp,
         date: today,
-        fullDate: new Date().toISOString() // Data completa para ordenação
+        fullDate: new Date().toISOString()
       };
       
-      permanentHistory.unshift(historyEntry); // Adiciona no início
-      
-      // Salva no localStorage (sem limite!)
-      localStorage.setItem('permanentHistory', JSON.stringify(permanentHistory));
+      permanentHistory.unshift(historyEntry);
+      localStorage.setItem('lais_permanentHistory', JSON.stringify(permanentHistory));
       
       updateTotalRecords();
       renderHistory(currentFilter);
     }
 
     function removeFromHistory(exercise) {
-      // Remove TODAS as entradas deste exercício (todas as datas)
       permanentHistory = permanentHistory.filter(entry => 
-        !(entry.exerciseNumber === exercise.n)
+        !(entry.exerciseNumber === exercise.n && entry.date === today)
       );
       
-      localStorage.setItem('permanentHistory', JSON.stringify(permanentHistory));
+      localStorage.setItem('lais_permanentHistory', JSON.stringify(permanentHistory));
       
       updateTotalRecords();
       renderHistory(currentFilter);
@@ -1002,7 +1099,6 @@
     function renderHistory(filter = 'all') {
       currentFilter = filter;
       
-      // Atualizar botões ativos
       filterBtns.forEach(btn => {
         btn.classList.remove('active');
         if (btn.dataset.filter === filter) {
@@ -1024,7 +1120,6 @@
       
       let html = '';
       filteredHistory.forEach(entry => {
-        // Formatar data para exibição
         const [year, month, day] = entry.date.split('-');
         const displayDate = `${day}/${month}/${year}`;
         
@@ -1059,10 +1154,10 @@
         completedExercises[key] = true;
         button.classList.add('completed');
         button.innerHTML = '<i class="fas fa-check"></i>';
-        addToHistory(exercise, 'Concluído');
+        addToHistory(exercise);
       }
       
-      localStorage.setItem('completedExercises', JSON.stringify(completedExercises));
+      localStorage.setItem('lais_completedExercises', JSON.stringify(completedExercises));
       
       const exerciseItem = button.closest('.exercise-item');
       if (completedExercises[key]) {
@@ -1091,8 +1186,8 @@
       if (confirm('⚠️ ATENÇÃO: Isso vai apagar TODO o histórico permanente! Tem certeza?')) {
         completedExercises = {};
         permanentHistory = [];
-        localStorage.setItem('completedExercises', JSON.stringify(completedExercises));
-        localStorage.setItem('permanentHistory', JSON.stringify(permanentHistory));
+        localStorage.setItem('lais_completedExercises', JSON.stringify(completedExercises));
+        localStorage.setItem('lais_permanentHistory', JSON.stringify(permanentHistory));
         render();
         updateTotalRecords();
         renderHistory(currentFilter);
@@ -1112,13 +1207,12 @@
         const key = getExerciseKey(item);
         const isCompleted = completedExercises[key];
         
-        const div = document.createElement('div');
-        div.className = `exercise-item ${isCompleted ? 'completed' : ''}`;
-        
-        // Encontrar a entrada MAIS RECENTE do histórico para este exercício (hoje)
         const todayEntry = permanentHistory.find(entry => 
           entry.exerciseNumber === item.n && entry.date === today
         );
+        
+        const div = document.createElement('div');
+        div.className = `exercise-item ${isCompleted ? 'completed' : ''}`;
         
         div.innerHTML = `
           <button class="exercise-header">
